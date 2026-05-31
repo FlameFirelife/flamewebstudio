@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FlameWeb Studio | Siti moderni per ristoranti e bar</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #f7f1e8;
+      --paper: #fffaf2;
+      --ink: #2b2018;
+      --muted: #7a6656;
+      --line: rgba(43, 32, 24, 0.14);
+      --olive: #6f7f45;
+      --terracotta: #c86b45;
+      --wine: #6e2d2c;
+      --cream: #fff5e4;
+      --shadow: 0 24px 80px rgba(65, 42, 24, 0.16);
+      --radius: 28px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(200, 107, 69, 0.17), transparent 30rem),
+        radial-gradient(circle at 90% 8%, rgba(111, 127, 69, 0.18), transparent 28rem),
+        linear-gradient(180deg, #fff8ec, var(--bg));
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1140px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(255, 250, 242, 0.8);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      font-size: 1.08rem;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      color: var(--cream);
+      background: linear-gradient(135deg, var(--wine), var(--terracotta));
+      box-shadow: 0 14px 35px rgba(110, 45, 44, 0.22);
+      font-family: Georgia, serif;
+      font-style: italic;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--ink);
+    }
+
+    .lang-pill {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.45);
+      border-radius: 999px;
+      padding: 9px 13px;
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 800;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 13px 19px;
+      background: var(--ink);
+      color: var(--cream);
+      font-weight: 850;
+      border: 1px solid transparent;
+      box-shadow: 0 18px 45px rgba(43, 32, 24, 0.18);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      background: var(--wine);
+      box-shadow: 0 22px 55px rgba(110, 45, 44, 0.22);
+    }
+
+    .button.secondary {
+      background: rgba(255,255,255,0.55);
+      color: var(--ink);
+      border-color: var(--line);
+      box-shadow: none;
+    }
+
+    .hero {
+      padding: 94px 0 70px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.04fr 0.96fr;
+      gap: 46px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      color: var(--wine);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 950;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(2.7rem, 7vw, 5.7rem);
+      line-height: 0.92;
+      letter-spacing: -0.08em;
+      max-width: 770px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.18rem);
+      margin: 24px 0 30px;
+      max-width: 650px;
+    }
+
+    .hero-actions, .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .tags {
+      margin-top: 26px;
+    }
+
+    .tag {
+      background: rgba(255,255,255,0.58);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .showcase-card {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.52);
+      border-radius: 38px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+      transform: rotate(1.4deg);
+    }
+
+    .phone-preview {
+      border-radius: 28px;
+      overflow: hidden;
+      background: #1e1712;
+      color: #fff7ec;
+      min-height: 570px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .preview-photo {
+      height: 290px;
+      background:
+        linear-gradient(180deg, rgba(30,23,18,0.08), rgba(30,23,18,0.82)),
+        url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+    }
+
+    .preview-photo small {
+      color: #f2c794;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+    }
+
+    .preview-photo h2 {
+      font-family: Georgia, serif;
+      font-size: 2.3rem;
+      line-height: 1;
+      margin-top: 7px;
+      font-weight: 700;
+    }
+
+    .preview-body {
+      padding: 20px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .preview-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .preview-row span {
+      color: #d9c4ad;
+      text-align: right;
+    }
+
+    section {
+      padding: 72px 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(2rem, 4.5vw, 3.6rem);
+      line-height: 0.96;
+      letter-spacing: -0.065em;
+      max-width: 760px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      max-width: 440px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.58);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 18px 55px rgba(65, 42, 24, 0.08);
+    }
+
+    .card h3 {
+      font-size: 1.24rem;
+      line-height: 1.1;
+      letter-spacing: -0.035em;
+      margin-bottom: 10px;
+    }
+
+    .card p, .card li {
+      color: var(--muted);
+    }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .compare-card {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .compare-window {
+      position: relative;
+      height: 360px;
+      overflow: hidden;
+      background: #ddd;
+      cursor: pointer;
+    }
+
+    .site-face {
+      position: absolute;
+      inset: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: opacity 0.35s ease, transform 0.35s ease, filter 0.35s ease;
+    }
+
+    .old-site {
+      background: #d7d0c4;
+      color: #4c4035;
+      font-family: "Times New Roman", serif;
+    }
+
+    .old-site .fake-browser {
+      background: #eee;
+      border: 2px solid #777;
+      padding: 8px;
+      font-size: 0.82rem;
+      color: #444;
+    }
+
+    .old-site h4 {
+      text-align: center;
+      padding: 10px;
+      font-size: 1.55rem;
+    }
+
+    .old-site .mess {
+      display: grid;
+      gap: 8px;
+      font-size: 0.9rem;
+    }
+
+    .mess-line {
+      background: rgba(255,255,255,0.55);
+      border: 1px dashed #555;
+      padding: 7px;
+    }
+
+    .new-site {
+      opacity: 0;
+      transform: translateY(16px) scale(0.98);
+      color: white;
+    }
+
+    .compare-card:hover .old-site,
+    .compare-card:focus-within .old-site {
+      opacity: 0;
+      transform: translateY(-12px) scale(1.02);
+      filter: blur(2px);
+    }
+
+    .compare-card:hover .new-site,
+    .compare-card:focus-within .new-site {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .classic-new {
+      background:
+        linear-gradient(180deg, rgba(50,27,19,0.18), rgba(50,27,19,0.88)),
+        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .modern-new {
+      background:
+        linear-gradient(180deg, rgba(16,35,31,0.08), rgba(16,35,31,0.88)),
+        url('https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=900&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .bar-new {
+      background:
+        linear-gradient(180deg, rgba(28,18,38,0.1), rgba(28,18,38,0.9)),
+        url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=900&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .new-site small {
+      color: #ffd59f;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .new-site h4 {
+      font-family: Georgia, serif;
+      font-size: 2.15rem;
+      line-height: 0.98;
+      max-width: 280px;
+    }
+
+    .pizza-new {
+      background: #fff8ef;
+      color: #211814;
+      padding: 0;
+    }
+
+    .pizza-new .pizza-hero {
+      height: 44%;
+      background:
+        linear-gradient(90deg, rgba(255,248,239,0.96) 0%, rgba(255,248,239,0.68) 48%, rgba(255,248,239,0.1) 100%),
+        url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=900&q=80');
+      background-size: cover;
+      background-position: center;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .pizza-new h4 {
+      color: #211814;
+      font-family: Inter, sans-serif;
+      font-size: 2rem;
+    }
+
+    .pizza-menu-preview {
+      padding: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .pizza-item {
+      border: 1px solid rgba(33,24,20,0.12);
+      background: white;
+      border-radius: 16px;
+      padding: 12px;
+      display: flex;
+      justify-content: space-between;
+      color: #211814;
+      box-shadow: 0 10px 22px rgba(33,24,20,0.07);
+    }
+
+    .pizza-cta-row {
+      display: flex;
+      gap: 8px;
+      padding: 0 18px 18px;
+    }
+
+    .pizza-chip {
+      background: #e24b2c;
+      color: white;
+      border-radius: 999px;
+      padding: 8px 11px;
+      font-weight: 900;
+      font-size: 0.76rem;
+    }
+
+    .bar-new-custom {
+      background: #100915;
+      color: white;
+      padding: 0;
+    }
+
+    .bar-stage {
+      height: 100%;
+      background:
+        radial-gradient(circle at 70% 20%, rgba(219, 82, 255, 0.34), transparent 12rem),
+        radial-gradient(circle at 20% 80%, rgba(255, 164, 82, 0.24), transparent 13rem),
+        linear-gradient(135deg, #160a1d, #09070c);
+      padding: 22px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+    }
+
+    .bar-logo-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #d7b7ff;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-weight: 950;
+    }
+
+    .bar-title {
+      align-self: center;
+    }
+
+    .bar-title h4 {
+      font-family: Inter, sans-serif;
+      font-size: 2.5rem;
+      letter-spacing: -0.08em;
+      max-width: 250px;
+    }
+
+    .bar-card-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .bar-mini-card {
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 12px;
+      backdrop-filter: blur(12px);
+      color: #f4e9ff;
+      font-size: 0.84rem;
+    }
+
+    .tavern-new-custom {
+      background:
+        linear-gradient(180deg, rgba(61,35,21,0.04), rgba(61,35,21,0.92)),
+        url('https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?auto=format&fit=crop&w=900&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+    }
+
+    .tavern-frame {
+      border: 1px solid rgba(255, 231, 186, 0.42);
+      border-radius: 24px;
+      padding: 18px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: rgba(36, 19, 12, 0.28);
+      backdrop-filter: blur(2px);
+    }
+
+    .tavern-new-custom h4 {
+      font-size: 2.4rem;
+      color: #fff2d8;
+    }
+
+    .tavern-bottom {
+      display: grid;
+      gap: 9px;
+    }
+
+    .tavern-pill {
+      background: rgba(255,242,216,0.14);
+      border: 1px solid rgba(255,242,216,0.25);
+      border-radius: 999px;
+      padding: 10px 12px;
+      color: #fff2d8;
+      font-weight: 800;
+      font-size: 0.86rem;
+    }
+
+    .old-tavern-chaos {
+      background: repeating-linear-gradient(45deg, #b98149, #b98149 12px, #d1a36f 12px, #d1a36f 24px);
+      color: #2f1809;
+      font-family: "Times New Roman", serif;
+      padding: 16px;
+    }
+
+    .old-tavern-chaos .old-box {
+      border: 5px ridge #7a2f10;
+      background: #f1d7a7;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .old-tavern-chaos h4 {
+      background: #741a12;
+      color: #ffe269;
+      text-shadow: 2px 2px #000;
+      margin: 12px 0;
+    }
+
+    .old-tavern-chaos .stamp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .old-tavern-chaos .stamp {
+      border: 2px dashed #6d3218;
+      background: #fff4c9;
+      padding: 8px;
+      font-size: 0.78rem;
+    }
+
+    .old-pizza-chaos {
+      background: linear-gradient(90deg, #00f, #ff0, #f00, #0f0);
+      color: #000;
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      padding: 14px;
+    }
+
+    .old-pizza-chaos h4 {
+      background: #fff;
+      color: #f00;
+      transform: rotate(-3deg);
+      border: 4px solid #000;
+      box-shadow: 7px 7px 0 #00f;
+      margin: 18px 0;
+    }
+
+    .old-pizza-chaos .coupon-wall {
+      display: grid;
+      gap: 8px;
+    }
+
+    .old-pizza-chaos .coupon {
+      background: #fff;
+      border: 3px dotted #f00;
+      padding: 9px;
+      font-size: 0.9rem;
+      transform: rotate(2deg);
+    }
+
+    .old-social-chaos {
+      background: #0d0d0d;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 16px;
+    }
+
+    .phone-shell-old {
+      width: 76%;
+      height: 88%;
+      margin: auto;
+      border: 10px solid #222;
+      border-radius: 30px;
+      background: #111;
+      overflow: hidden;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.4);
+    }
+
+    .ig-top {
+      height: 38px;
+      background: #1b1b1b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.82rem;
+    }
+
+    .ig-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      padding: 2px;
+    }
+
+    .ig-cell {
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, #333, #777);
+    }
+
+    .ig-cell:nth-child(2n) { background: linear-gradient(135deg, #5d214f, #c06083); }
+    .ig-cell:nth-child(3n) { background: linear-gradient(135deg, #33214d, #5f6ec9); }
+
+    .new-panel {
+      background: rgba(255,255,255,0.13);
+      border: 1px solid rgba(255,255,255,0.22);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 14px;
+      display: grid;
+      gap: 8px;
+      font-size: 0.92rem;
+    }
+
+    .compare-text {
+      padding: 22px;
+    }
+
+    .compare-hint {
+      margin-top: 12px;
+      color: var(--wine);
+      font-weight: 900;
+      font-size: 0.92rem;
+    }
+
+    .packages {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 18px;
+    }
+
+    .price strong {
+      display: block;
+      font-size: 3.2rem;
+      line-height: 1;
+      letter-spacing: -0.075em;
+      margin: 14px 0;
+    }
+
+    ul {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    li::before {
+      content: "✓";
+      color: var(--olive);
+      font-weight: 950;
+      margin-right: 8px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      counter-reset: step;
+    }
+
+    .step {
+      counter-increment: step;
+    }
+
+    .step::before {
+      content: "0" counter(step);
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      background: rgba(200,107,69,0.14);
+      color: var(--wine);
+      font-weight: 950;
+      margin-bottom: 18px;
+    }
+
+    .note {
+      border-left: 5px solid var(--terracotta);
+      background: rgba(255,255,255,0.58);
+      padding: 18px 20px;
+      border-radius: 18px;
+      color: var(--muted);
+      margin-top: 24px;
+    }
+
+    .cta {
+      border: 1px solid var(--line);
+      border-radius: 38px;
+      padding: 38px;
+      background:
+        radial-gradient(circle at top right, rgba(111,127,69,0.18), transparent 24rem),
+        rgba(255,255,255,0.62);
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .cta p {
+      color: var(--muted);
+      max-width: 720px;
+      margin-top: 10px;
+    }
+
+    footer {
+      padding: 30px 0;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 920px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero-grid,
+      .grid-3,
+      .compare-grid,
+      .packages,
+      .steps,
+      .cta {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 70px;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-head p {
+        margin-top: 12px;
+      }
+
+      .showcase-card {
+        transform: none;
+      }
+
+      .compare-window {
+        height: 330px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="container">
+      <a class="brand" href="#top" aria-label="FlameWeb Studio home">
+        <span class="brand-mark">S</span>
+        <span>FlameWeb Studio</span>
+      </a>
+      <div class="nav-links">
+        <a href="#prima-dopo">Prima / Dopo</a>
+        <a href="#servizi">Servizi</a>
+        <a href="#prezzi">Prezzi</a>
+        <a href="#come-funziona">Come funziona</a>
+      </div>
+      <span class="lang-pill">IT / EN</span>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Siti moderni per ristoranti, bar e attività locali</div>
+          <h1>Un sito semplice, bello e utile. Senza complicazioni.</h1>
+          <p>
+            Creo piccoli siti web personalizzati per locali che vogliono presentarsi meglio online:
+            menù, orari, foto, mappa, contatti e stile del posto in una pagina chiara e moderna.
+          </p>
+          <p lang="en">
+            I make small custom websites for local restaurants and bars: menu, opening hours,
+            photos, map, contact buttons and a design that actually fits the place.
+          </p>
+          <div class="hero-actions">
+            <a class="button" href="#prima-dopo">Vedi esempi</a>
+            <a class="button secondary" href="#prezzi">Pacchetti semplici</a>
+          </div>
+          <div class="tags">
+            <span class="tag">Design su misura</span>
+            <span class="tag">Mobile-first</span>
+            <span class="tag">Italiano + Inglese</span>
+            <span class="tag">Pagamento unico</span>
+          </div>
+        </div>
+
+        <div class="showcase-card">
+          <div class="phone-preview">
+            <div class="preview-photo">
+              <small>Concept demo</small>
+              <h2>Osteria del Ponte</h2>
+              <p style="margin: 8px 0 0; color: #ead2bb;">Cucina locale, atmosfera calda, prenotazione facile.</p>
+            </div>
+            <div class="preview-body">
+              <div class="preview-row"><b>Specialità</b><span>Tortelli • Risotti • Vini locali</span></div>
+              <div class="preview-row"><b>Orari</b><span>12:00–14:30 / 19:00–22:30</span></div>
+              <div class="preview-row"><b>Contatti</b><span>Telefono • WhatsApp • Maps</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="prima-dopo">
+      <div class="container">
+        <div class="section-head">
+          <h2>Prima e dopo: da “sito dimenticato” a presenza online seria.</h2>
+          <p>Passa sopra le card per vedere il restyling. Sono esempi inventati, creati solo per mostrare diversi stili possibili.</p>
+        </div>
+
+        <div class="compare-grid">
+          <article class="card compare-card" tabindex="0">
+            <div class="compare-window" aria-label="Before after tavern concept">
+              <div class="site-face old-site old-tavern-chaos">
+                <div class="old-box">
+                  <div class="fake-browser">osteria-example.it</div>
+                  <h4>OSTERIA DA GIANNI</h4>
+                  <div class="stamp-grid">
+                    <div class="stamp">MENU</div>
+                    <div class="stamp">DOVE SIAMO</div>
+                    <div class="stamp">FOTO</div>
+                    <div class="stamp">TELEFONO</div>
+                  </div>
+                </div>
+              </div>
+              <div class="site-face new-site tavern-new-custom">
+                <div class="tavern-frame">
+                  <div>
+                    <small>Richiesta esempio</small>
+                    <h4>Caldo, rustico, tradizionale.</h4>
+                  </div>
+                  <div class="tavern-bottom">
+                    <div class="tavern-pill">Menù stagionale</div>
+                    <div class="tavern-pill">Prenota un tavolo</div>
+                    <div class="tavern-pill">Apri su Google Maps</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="compare-text">
+              <h3>Osteria tradizionale</h3>
+              <div class="compare-hint">Hover / touch</div>
+            </div>
+          </article>
+
+          <article class="card compare-card" tabindex="0">
+            <div class="compare-window" aria-label="Before after pizzeria concept">
+              <div class="site-face old-site old-pizza-chaos">
+                <div class="fake-browser">superpizza-example.net</div>
+                <h4>SUPER PIZZA</h4>
+                <div class="coupon-wall">
+                  <div class="coupon">MENU COMPLETO</div>
+                  <div class="coupon">OFFERTE DEL GIORNO</div>
+                  <div class="coupon">CONSEGNA A DOMICILIO</div>
+                  <div class="coupon">CHIAMA ORA</div>
+                </div>
+              </div>
+              <div class="site-face new-site pizza-new">
+                <div class="pizza-hero">
+                  <small>Richiesta esempio</small>
+                  <h4>Pulito, giovane, veloce.</h4>
+                </div>
+                <div class="pizza-menu-preview">
+                  <div class="pizza-item"><b>Margherita</b><span>€6</span></div>
+                  <div class="pizza-item"><b>Diavola</b><span>€8</span></div>
+                  <div class="pizza-item"><b>Bufalina</b><span>€9</span></div>
+                </div>
+                <div class="pizza-cta-row">
+                  <span class="pizza-chip">Ordina</span>
+                  <span class="pizza-chip">Menù</span>
+                  <span class="pizza-chip">Maps</span>
+                </div>
+              </div>
+            </div>
+            <div class="compare-text">
+              <h3>Pizzeria moderna</h3>
+              <div class="compare-hint">Hover / touch</div>
+            </div>
+          </article>
+
+          <article class="card compare-card" tabindex="0">
+            <div class="compare-window" aria-label="Before after bar concept">
+              <div class="site-face old-site old-social-chaos">
+                <div class="phone-shell-old">
+                  <div class="ig-top">NEON ROOM</div>
+                  <div class="ig-grid">
+                    <div class="ig-cell"></div><div class="ig-cell"></div><div class="ig-cell"></div>
+                    <div class="ig-cell"></div><div class="ig-cell"></div><div class="ig-cell"></div>
+                    <div class="ig-cell"></div><div class="ig-cell"></div><div class="ig-cell"></div>
+                    <div class="ig-cell"></div><div class="ig-cell"></div><div class="ig-cell"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="site-face new-site bar-new-custom">
+                <div class="bar-stage">
+                  <div class="bar-logo-line"><span>Neon Room</span><span>Tonight</span></div>
+                  <div class="bar-title">
+                    <small>Richiesta esempio</small>
+                    <h4>Serale, elegante, memorabile.</h4>
+                  </div>
+                  <div class="bar-card-row">
+                    <div class="bar-mini-card">Cocktail list</div>
+                    <div class="bar-mini-card">Eventi</div>
+                    <div class="bar-mini-card">Orari</div>
+                    <div class="bar-mini-card">Prenota</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="compare-text">
+              <h3>Cocktail bar</h3>
+              <div class="compare-hint">Hover / touch</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="servizi">
+      <div class="container">
+        <div class="section-head">
+          <h2>Cosa può contenere il sito</h2>
+          <p>Solo ciò che serve davvero ai clienti: niente caos, niente pagine inutili, niente effetto “template vecchio”.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card">
+            <h3>Menù e specialità</h3>
+            <p>Piatti, bevande, prezzi, menù del giorno o categorie semplici da leggere da telefono.</p>
+          </article>
+          <article class="card">
+            <h3>Foto e atmosfera</h3>
+            <p>Una grafica costruita intorno al locale: rustico, moderno, caldo, elegante o informale.</p>
+          </article>
+          <article class="card">
+            <h3>Contatti rapidi</h3>
+            <p>Telefono, WhatsApp, email, orari, indirizzo e pulsante per aprire Google Maps.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="prezzi">
+      <div class="container">
+        <div class="section-head">
+          <h2>Pacchetti piccoli, chiari e senza abbonamenti strani.</h2>
+          <p>Prezzi pensati per attività locali che vogliono iniziare con qualcosa di semplice. Dominio e hosting, se servono, sono costi separati.</p>
+        </div>
+        <div class="packages">
+          <article class="card price">
+            <h3>Pagina base</h3>
+            <strong>€50</strong>
+            <p>Una landing page pulita per chi non ha ancora un sito.</p>
+            <ul>
+              <li>Design responsive</li>
+              <li>Sezione menù o servizi</li>
+              <li>Orari, indirizzo e contatti</li>
+              <li>Pubblicazione su link demo</li>
+            </ul>
+          </article>
+          <article class="card price">
+            <h3>Mini-sito personalizzato</h3>
+            <strong>€120+</strong>
+            <p>Un sito più completo, con più cura visiva e più sezioni.</p>
+            <ul>
+              <li>Stile grafico più personalizzato</li>
+              <li>Galleria fotografica</li>
+              <li>Italiano + Inglese</li>
+              <li>Piccole modifiche dopo la consegna</li>
+            </ul>
+          </article>
+        </div>
+        <div class="note">
+          Nota: questo sito portfolio non mostra dati personali. Chi riceve il link può valutare direttamente esempi, stile e proposta.
+        </div>
+      </div>
+    </section>
+
+    <section id="come-funziona">
+      <div class="container">
+        <div class="section-head">
+          <h2>Processo semplice</h2>
+          <p>L’idea è ridurre al minimo il tempo richiesto al proprietario del locale.</p>
+        </div>
+        <div class="steps">
+          <article class="card step">
+            <h3>Info iniziali</h3>
+            <p>Nome del locale, foto, menù, orari e stile desiderato.</p>
+          </article>
+          <article class="card step">
+            <h3>Anteprima</h3>
+            <p>Creo una prima bozza visiva per capire se la direzione piace.</p>
+          </article>
+          <article class="card step">
+            <h3>Modifiche</h3>
+            <p>Piccoli aggiustamenti a testi, immagini, colori e sezioni.</p>
+          </article>
+          <article class="card step">
+            <h3>Consegna</h3>
+            <p>Il sito viene consegnato o pubblicato su un link condivisibile.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="cta">
+          <div>
+            <div class="eyebrow">Proposta senza pressione</div>
+            <h2>Vuoi vedere come potrebbe apparire il tuo locale online?</h2>
+            <p>
+              Posso preparare una piccola anteprima personalizzata partendo da nome, foto, menù e stile del locale.
+              Da lì si decide con calma se continuare.
+            </p>
+            <p lang="en">
+              I can prepare a small custom preview based on your restaurant/bar name, photos, menu and style.
+              Then you can decide without pressure.
+            </p>
+          </div>
+          <a class="button" href="#top">Torna su</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 FlameWeb Studio. Siti web semplici e personalizzati per attività locali.</p>
+    </div>
+  </footer>
+</body>
+</html>
